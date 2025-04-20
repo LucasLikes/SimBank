@@ -1,0 +1,8 @@
+.env
+node_modules/
+node_modules/.package-lock.json
+node_modules/dotenv/CHANGELOG.md
+node_modules/dotenv/package.json
+node_modules/dotenv/README-es.md
+node_modules/dotenv/README.md
+node_modules/dotenv/lib/main.js

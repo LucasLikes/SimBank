@@ -2,9 +2,10 @@ const amqp = require('amqplib');
 const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
 const { PutCommand, DynamoDBDocumentClient } = require("@aws-sdk/lib-dynamodb");
 const { v4: uuidv4 } = require('uuid');
+require('dotenv').config();
 
-const RABBITMQ_URL = 'amqps://iavbtmlp:jSGWMf_afzDGBp8wtsI9BxnUaDrj5mQj@jaragua.lmq.cloudamqp.com/iavbtmlp';
-const QUEUE = 'chamados_suporte';
+const RABBITMQ_URL = process.env.RABBITMQ_URL;
+const QUEUE = process.env.QUEUE;
 
 const client = new DynamoDBClient({ region: "sa-east-1" });
 const ddbDocClient = DynamoDBDocumentClient.from(client);

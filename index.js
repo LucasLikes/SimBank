@@ -2,19 +2,20 @@ const express = require('express');
 const amqp = require('amqplib');
 const app = express();
 app.use(express.json());
+require('dotenv').config();
 
-const amqp_url = 'amqps://iavbtmlp:jSGWMf_afzDGBp8wtsI9BxnUaDrj5mQj@jaragua.lmq.cloudamqp.com/iavbtmlp';
+const amqp_url = process.env.RABBITMQ_URL;
 
 async function sendToQueue(msg) {
   const conn = await amqp.connect(amqp_url);
   const channel = await conn.createChannel();
   const queue = 'chamados_suporte';
 
-  await channel.assertQueue(queue, { durable: true });
+await channel.assertQueue(queue, { durable: true });
 
-  channel.sendToQueue(queue, Buffer.from(JSON.stringify(msg)), {
-    persistent: true
-  });
+channel.sendToQueue(queue, Buffer.from(JSON.stringify(msg)), {
+  persistent: true
+});
 
   setTimeout(() => {
     conn.close();
